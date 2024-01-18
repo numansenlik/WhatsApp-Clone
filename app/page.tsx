@@ -1,8 +1,6 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <main className="">
+    <main className="flex h-screen overflow-hidden">
       <h1>Whatsapp clone</h1>
     </main>
   );
