@@ -17,7 +17,6 @@ const ChatSidebar: React.FC<Props> = ({ data }) => {
       <SideBarHeader />
       <Search />
       <Archived />
-      {/* Chats */}
       {users?.map((user: AllUsersType) => (
         <Chat key={user.id} data={user} />
       ))}
