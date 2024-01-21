@@ -3,7 +3,7 @@ import React from "react";
 
 const MainScreen: React.FC = () => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col ">
       <MainScreenHeader />
     </div>
   );
