@@ -7,7 +7,7 @@ export interface AllUsers {
 
 export interface AllUsersType {
   map(
-    arg0: (user: AllUsersType) => import("react").JSX.Element
+    arg0: (item: AllUsersType, index: number) => JSX.Element
   ): import("react").ReactNode;
   id: number;
   firstName: string;
@@ -41,7 +41,6 @@ export interface AllUsersType {
     postalCode: string;
     state: string;
   };
-
   macAddress: string;
   university: string;
   bank: {
@@ -69,4 +68,33 @@ export interface AllUsersType {
   ein: string;
   ssn: string;
   userAgent: string;
+}
+
+export interface ContactsType {
+  email: string;
+  id?: string;
+  lastOnline: {
+    nanoseconds: number;
+    seconds: number;
+  };
+  name: string;
+  photo: string;
+  uid: string;
+}
+
+export interface ChatMessageType {
+  messageBody: string;
+  createdAt: string;
+  messageSender: string;
+  messageSenderId: string;
+  messageRecipientId: string;
+  type?: string;
+  photoURL?: string | StorageReference;
+}
+
+export interface ImagesType {
+  photoURL: string;
+  createdAt: string | FieldValue;
+  type: string;
+  messageSenderId: string | undefined;
 }
