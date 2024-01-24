@@ -9,6 +9,7 @@ import {
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import UserAvatar from "../common/UserAvatar";
+import AppModal from "../AppModal";
 
 const SideBarHeader: React.FC = () => {
   const isLoggedIn = auth?.currentUser;
@@ -30,7 +31,11 @@ const SideBarHeader: React.FC = () => {
         <DataUsage />
       </IconButton>
       <IconButton>
-        <ChatOutlined />
+        <AppModal
+          icon={<ChatOutlined />}
+          title="All Contacts"
+          modalType="chat"
+        />
       </IconButton>
     </div>
   );

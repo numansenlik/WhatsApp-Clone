@@ -1,8 +1,17 @@
 import { User } from "firebase/auth";
-import { doc, getFirestore, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+  DocumentData,
+  collection,
+  doc,
+  getFirestore,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import { firestoreApp } from ".";
 
 export const firestore = getFirestore(firestoreApp);
+
+export const usersCollection = collection(firestore, "users");
 
 export const addUserToFirestore = async (user: User) => {
   const userRef = doc(firestore, "users", user.uid);
@@ -18,3 +27,10 @@ export const addUserToFirestore = async (user: User) => {
     { merge: true }
   );
 };
+
+export function getSnapshotDoc(doc: DocumentData) {
+  return {
+    id: doc.id,
+    ...doc.data(),
+  };
+}
