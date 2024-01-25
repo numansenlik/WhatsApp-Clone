@@ -3,6 +3,7 @@ import {
   DocumentData,
   collection,
   doc,
+  getDoc,
   getFirestore,
   serverTimestamp,
   setDoc,
@@ -34,3 +35,11 @@ export function getSnapshotDoc(doc: DocumentData) {
     ...doc.data(),
   };
 }
+
+export const getSingleUserFromFirestore = async (userId: string) => {
+  if (!userId) return;
+  const userRef = doc(firestore, `users/${userId}`);
+  const userSnap = await getDoc(userRef);
+  const user = userSnap.data();
+  return user;
+};

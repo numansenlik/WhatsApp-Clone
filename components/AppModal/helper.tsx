@@ -2,6 +2,7 @@ import { ContactsType } from "@/types";
 import { IconModalType } from ".";
 import UploadModal from "./UploadModal";
 import ContactList from "./ContactList";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export const boxStyle = {
   position: "absolute" as "absolute",
@@ -29,3 +30,39 @@ export const handleModalChildren = (
       return;
   }
 };
+
+export const chooseContact = (
+  contact: ContactsType,
+  handleClose: () => void,
+  router: AppRouterInstance
+) => {
+  handleClose();
+  router.push(`/chat/${contact.uid}`);
+};
+
+// TS function overload
+
+export function formatDate(date: number): string;
+export function formatDate(date: Date): string;
+export function formatDate(arg1: unknown): string {
+  if (typeof arg1 === "number") {
+    const d = new Date(arg1 * 1000);
+    const fullDate = d.toLocaleString();
+    const dateOnly = fullDate.split(" ")[0];
+    const timeOnly = fullDate.split(" ")[1];
+
+    return `${timeOnly}`;
+  } else {
+    const todayDate = new Date().toLocaleString("en-US", {
+      year: undefined,
+      month: undefined,
+      day: undefined,
+      weekday: undefined,
+      hour: "2-digit",
+      hour12: false,
+      minute: "2-digit",
+      second: undefined,
+    });
+    return `${todayDate}`;
+  }
+}

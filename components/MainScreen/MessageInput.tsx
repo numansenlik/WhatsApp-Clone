@@ -1,16 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { IconButton } from "@mui/material";
-import Mood from "@mui/icons-material/Mood";
-import { AttachFile, KeyboardVoiceOutlined } from "@mui/icons-material";
+import { createNewChat } from "@/lib/firebase/messageController";
+import { useParams } from "next/navigation";
+import AppModal from "../AppModal";
+import { AttachFile, KeyboardVoiceOutlined, Mood } from "@mui/icons-material";
 
 const MessageInput: React.FC = () => {
-  const [message, setMessage] = useState<string>("");
+  const params = useParams();
+
+  const [message, setMessage] = React.useState<string>("");
 
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (message === "") return;
+    createNewChat(message, params?.id);
     setMessage("");
   };
   return (
@@ -19,7 +25,11 @@ const MessageInput: React.FC = () => {
         <Mood />
       </IconButton>
       <IconButton>
-        <AttachFile />
+        <AppModal
+          icon={<AttachFile />}
+          title="Upload Image"
+          modalType="upload"
+        />
       </IconButton>
       <form className="w-full" onSubmit={sendMessage}>
         <input
