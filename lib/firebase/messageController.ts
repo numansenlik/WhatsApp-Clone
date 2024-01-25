@@ -27,7 +27,6 @@ export const createNewChat = async (messageText: string, routerId: any) => {
           createdAt: new Date(),
           messageSender: currentUser?.email,
           messageSenderId: currentUser?.uid,
-          //   This is only used for the first index of the array
           messageRecipient: recipientDetails?.email,
           messageRecipientId: recipientDetails?.uid,
         }),
@@ -37,7 +36,7 @@ export const createNewChat = async (messageText: string, routerId: any) => {
   );
 };
 
-export const getSingleChatFromFirestore = async (chatId: string) => {
+export const getSingleChatFromFirestore = async (chatId: any) => {
   if (!chatId) return;
   const chatRef = doc(firestore, `chats/${chatId}`);
   const chatSnap = await getDoc(chatRef);
