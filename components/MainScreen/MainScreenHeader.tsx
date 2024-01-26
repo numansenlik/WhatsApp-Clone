@@ -10,11 +10,15 @@ import {
 import { ClickAwayListener, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SignOutButton from "../common/SignOutButton";
-import { getSingleChatFromFirestore } from "@/lib/firebase/messageController";
+import {
+  deleteChatFromFirestore,
+  getSingleChatFromFirestore,
+} from "@/lib/firebase/messageController";
 import { useParams, useRouter } from "next/navigation";
 import { auth } from "@/lib/firebase";
 import { getSingleUserFromFirestore } from "@/lib/firebase/userController";
 import { DocumentData } from "firebase/firestore";
+import UserAvatar from "../common/UserAvatar";
 
 const MainScreenHeader: React.FC = () => {
   const params = useParams();
@@ -63,7 +67,14 @@ const MainScreenHeader: React.FC = () => {
   return (
     <div className="sticky top-0 p-2 h-20 bg-gray-200 border-b border-gray-400 z-10 flex items-center justify-between">
       <div>
-        <AccountCircle />
+        {contactInfo ? (
+          <div className="flex items-center gap-2">
+            <UserAvatar image={contactInfo?.photo} alt={contactInfo?.name} />
+            <strong>{contactInfo?.name}</strong>
+          </div>
+        ) : (
+          <AccountCircle />
+        )}
       </div>
       <ClickAwayListener onClickAway={handleClose}>
         <div className="flex gap-6 items-center">
@@ -76,7 +87,9 @@ const MainScreenHeader: React.FC = () => {
           <IconButton>
             <SearchOutlined />
           </IconButton>
-          <IconButton>
+          <IconButton
+            onClick={() => deleteChatFromFirestore(params?.id, router)}
+          >
             <DeleteOutlineOutlined />
           </IconButton>
           <SignOutButton open={open} handleToggle={handleToggle} />

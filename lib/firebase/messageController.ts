@@ -1,6 +1,7 @@
 import {
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getFirestore,
@@ -8,6 +9,7 @@ import {
 } from "firebase/firestore";
 import { auth, firestoreApp } from ".";
 import { getSingleUserFromFirestore } from "./userController";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export const firestore = getFirestore(firestoreApp);
 
@@ -42,4 +44,14 @@ export const getSingleChatFromFirestore = async (chatId: any) => {
   const chatSnap = await getDoc(chatRef);
   const chat = chatSnap.data();
   return chat;
+};
+
+export const deleteChatFromFirestore = async (
+  chatId: any,
+  router: AppRouterInstance
+) => {
+  const chatRef = doc(firestore, `chats/${chatId}`);
+  await deleteDoc(chatRef);
+  console.log(`The chat has now been deleted`);
+  router.push("/");
 };
