@@ -8,8 +8,6 @@ type Props = {
 };
 
 const Messages: React.FC<Props> = ({ data, paramId }) => {
-  console.log(data);
-
   return (
     <div>
       {data?.map((item, index) => (

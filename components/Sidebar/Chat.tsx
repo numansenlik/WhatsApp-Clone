@@ -15,12 +15,16 @@ type Props = {
 const Chat: React.FC<Props> = ({ data, chatData }) => {
   const [chatInfo, setChatInfo] = useState<DocumentData | undefined>({});
 
+  // useCallback hook'u, bir işlevi bir bağımlılık listesi değiştiğinde yaratır
   const filterContact = useCallback(async () => {
+    // handleContactInfo fonksiyonu kullanılarak iletişim bilgilerini filtreleme
     const res = await handleContactInfo(chatData, chatData?.link);
     return res;
   }, [chatData]);
 
+  // useEffect hook'u, bileşenin oluşturulduğu anda ve bağımlılık listesindeki değerler değiştiğinde çalışır
   useEffect(() => {
+    // filterContact işlemini gerçekleştirme
     filterContact()
       .then((res: DocumentData | undefined) => setChatInfo(res))
       .catch((err) => err);

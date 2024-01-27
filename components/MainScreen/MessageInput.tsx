@@ -8,15 +8,23 @@ import AppModal from "../AppModal";
 import { AttachFile, KeyboardVoiceOutlined, Mood } from "@mui/icons-material";
 
 const MessageInput: React.FC = () => {
+  // useParams hook'u ile URL parametrelerini alıyoruz
   const params = useParams();
 
+  // State hook'u ile mesajı tutuyoruz
   const [message, setMessage] = React.useState<string>("");
 
+  // Mesaj gönderme fonksiyonu
   const sendMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Eğer mesaj boşsa gönderme işlemini iptal et
     if (message === "") return;
+
+    // createNewChat fonksiyonu ile yeni bir sohbet oluşturuyoruz
     createNewChat(message, params?.id);
+
+    // Gönderildikten sonra mesajı sıfırla
     setMessage("");
   };
   return (
