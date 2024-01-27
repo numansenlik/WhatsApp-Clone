@@ -11,20 +11,31 @@ import { useRouter } from "next/navigation";
 
 const LoginButton = () => {
   const router = useRouter();
+
+  // Google hesabı ile giriş yapma fonksiyonu
   const handleSignIn = () => {
+    // Tarayıcı oturum sürekliliği ayarlanıyor
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
+        // Google hesabı ile giriş yapma pop-up penceresi açılıyor
         signInWithPopup(auth, googleProvider)
           .then((result) => {
+            // Giriş başarılı olduğunda kullanıcı bilgileri alınıyor
             const user = result?.user;
+
+            // Ana sayfaya yönlendirme yapılıyor
             router.push("/");
+
+            // Firestore'a kullanıcı bilgilerini ekleyen fonksiyon çağrılıyor
             addUserToFirestore(user);
           })
           .catch((error) => {
+            // Hata durumunda hata mesajı fırlatılıyor
             throw new Error(error.message);
           });
       })
       .catch((error) => {
+        // Hata durumunda hata mesajı fırlatılıyor
         throw new Error(error.message);
       });
   };

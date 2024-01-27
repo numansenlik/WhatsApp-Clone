@@ -22,30 +22,37 @@ export const handleModalChildren = (
   handleClose: () => void
 ) => {
   switch (modalType) {
+    // Eğer modalType "upload" ise UploadModal bileşenini döndür
     case "upload":
       return <UploadModal handleClose={handleClose} />;
+    // Eğer modalType "chat" ise ContactList bileşenini döndür
     case "chat":
       return <ContactList contacts={contacts} handleClose={handleClose} />;
+    // Diğer durumlarda null döndür
     default:
-      return;
+      return null;
   }
 };
 
+// Seçilen bir kişiyi sohbet ekranına yönlendiren fonksiyon
 export const chooseContact = (
   contact: ContactsType,
   handleClose: () => void,
   router: AppRouterInstance
 ) => {
+  // Modal'ı kapat
   handleClose();
+
+  // Seçilen kişinin sohbet ekranına yönlendir
   router.push(`/chat/${contact.uid}`);
 };
 
-// TS function overload
-
+// Tarih ve saat formatını ayarlayan fonksiyon
 export function formatDate(date: number): string;
 export function formatDate(date: Date): string;
 export function formatDate(arg1: unknown): string {
   if (typeof arg1 === "number") {
+    // Eğer argüman bir sayı ise, Unix timestamp'i alıp tarih ve saat formatına çevir
     const d = new Date(arg1 * 1000);
     const fullDate = d.toLocaleString();
     const dateOnly = fullDate.split(" ")[0];
@@ -53,6 +60,7 @@ export function formatDate(arg1: unknown): string {
 
     return `${timeOnly}`;
   } else {
+    // Eğer argüman bir tarih nesnesi ise, günün bugünkü tarih ve saati formatına çevir
     const todayDate = new Date().toLocaleString("en-US", {
       year: undefined,
       month: undefined,
@@ -63,6 +71,7 @@ export function formatDate(arg1: unknown): string {
       minute: "2-digit",
       second: undefined,
     });
+
     return `${todayDate}`;
   }
 }

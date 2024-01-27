@@ -3,7 +3,6 @@
 import React, { use } from "react";
 import { Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useParams } from "next/navigation";
 
 export type UploadModalProps = {
   handleClose: () => void;
@@ -11,7 +10,6 @@ export type UploadModalProps = {
 
 const UploadModal: React.FC<UploadModalProps> = ({ handleClose }) => {
   const [file, setFile] = React.useState<File | null>(null);
-  const params = useParams();
 
   return (
     <div className="mt4 flex flex-col gap-2">
@@ -38,12 +36,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ handleClose }) => {
             />
           </>
         ) : null}
-        <Button
-          variant="contained"
-          component="label"
-          disabled={file === null}
-          //   onClick={() => handleUpload(params?.id, setFile, handleClose, file)}
-        >
+        <Button variant="contained" component="label" disabled={file === null}>
           Submit{" "}
         </Button>
       </div>

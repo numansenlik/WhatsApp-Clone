@@ -16,11 +16,15 @@ type Props = {
 
 const AppModal: React.FC<Props> = ({ icon, title, modalType }) => {
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
-  // fetch user contacts in realtime from firestore
+
+  // Firestore'dan kullanıcıların gerçek zamanlı olarak alınan kişilerin bilgileri
   const [contacts, setContacts] = React.useState<ContactsType[]>([]);
 
+  // Firestore'dan kişi listesini gerçek zamanlı olarak almak için useEffect
   useEffect(
     () =>
       onSnapshot(usersCollection, (snapshot: QuerySnapshot<DocumentData>) => {

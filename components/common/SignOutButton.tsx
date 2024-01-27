@@ -11,8 +11,13 @@ type Props = {
 };
 const SignOutButton: React.FC<Props> = ({ handleToggle, open }) => {
   const router = useRouter();
+
+  // Kullanıcıyı Whatsapp'tan çıkış yapma fonksiyonu
   const signOutFromWhatsapp = () => {
+    // Firebase Authentication üzerinden çıkış yapılıyor
     auth.signOut();
+
+    // Kullanıcı çıkış yaptıktan sonra login sayfasına yönlendirme yapılıyor
     router.push("/login");
   };
   return (
