@@ -8,7 +8,7 @@ export default async function Home() {
       <div className="bg-white-500 w-1/3 overflow-y-auto">
         <ChatSidebar />
       </div>
-      <div className="w-full overflow-y-auto ">
+      <div className="w-2/3 overflow-y-auto ">
         <MainScreen />
       </div>
     </main>

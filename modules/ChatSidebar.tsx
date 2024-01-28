@@ -1,5 +1,4 @@
 import Archived from "@/components/Sidebar/Archived";
-import Chat from "@/components/Sidebar/Chat";
 import FirestoreChats from "@/components/Sidebar/FirestoreChats";
 import Search from "@/components/Sidebar/Search";
 import SideBarHeader from "@/components/Sidebar/SideBarHeader";

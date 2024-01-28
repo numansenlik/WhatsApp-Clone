@@ -11,6 +11,8 @@ import UserAvatar from "../common/UserAvatar";
 import AppModal from "../AppModal";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
 
 const SideBarHeader: React.FC = () => {
   const isLoggedIn = auth?.currentUser;
@@ -24,7 +26,7 @@ const SideBarHeader: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex justify-evenly items-center px-2 py-4 h-20 border-r-gray-200 border-solid border-b border-b-gray-200 bg-white z-10">
+    <div className="flex justify-between items-center px-[5px] py-[8px] h-[59px] border-r-gray-200 border-solid border-b border-b-gray-200 bg-[#f0f2f5] z-10">
       {/* Kullanıcının giriş yapmış olup olmadığını kontrol ediyoruz */}
       <div className="pl-2">
         {isLoggedIn !== null ? (
@@ -35,21 +37,27 @@ const SideBarHeader: React.FC = () => {
           <AccountCircle className="rounded-full cursor-pointer hover:opacity-70" />
         )}
       </div>
-
-      <IconButton>
-        <GroupsOutlined />
-      </IconButton>
-      <IconButton>
-        <DataUsage />
-      </IconButton>
-
-      <IconButton>
-        <AppModal
-          icon={<ChatOutlined />}
-          title="All Contacts"
-          modalType="chat"
-        />
-      </IconButton>
+      <div className="w-[240px] flex justify-around">
+        <IconButton>
+          <GroupsOutlined />
+        </IconButton>
+        <IconButton>
+          <DataUsage />
+        </IconButton>
+        <IconButton>
+          <MapsUgcOutlinedIcon />
+        </IconButton>
+        <IconButton>
+          <AppModal
+            icon={<ChatOutlined />}
+            title="All Contacts"
+            modalType="chat"
+          />
+        </IconButton>
+        <IconButton>
+          <MoreVertIcon />
+        </IconButton>
+      </div>
     </div>
   );
 };

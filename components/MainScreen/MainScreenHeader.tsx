@@ -57,7 +57,7 @@ const MainScreenHeader: React.FC = () => {
   }, [params?.id]);
 
   return (
-    <div className="sticky top-0 p-2 h-20 bg-gray-200 border-b border-gray-400 z-10 flex items-center justify-between">
+    <div className="sticky top-0 p-2   border-l border-[#cecfd0] z-10 flex  justify-between  px-[5px] py-[8px] h-[59px] border-solid border-b  bg-[#f0f2f5]  ">
       {/* İletişim bilgisi varsa, kullanıcı adı ve resmi göster */}
       <div>
         {contactInfo ? (
