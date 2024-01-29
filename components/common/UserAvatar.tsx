@@ -10,8 +10,8 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ image, alt }) => {
       className="rounded-full"
       src={image ? image : ""}
       alt={alt ? alt : ""}
-      width={40}
-      height={40}
+      width={41}
+      height={41}
     />
   );
 };

@@ -61,9 +61,11 @@ const MainScreenHeader: React.FC = () => {
       {/* İletişim bilgisi varsa, kullanıcı adı ve resmi göster */}
       <div>
         {contactInfo ? (
-          <div className="flex items-center gap-2">
-            <UserAvatar image={contactInfo?.photo} alt={contactInfo?.name} />
-            <strong>{contactInfo?.name}</strong>
+          <div className="flex items-center ">
+            <div className="mx-[12px]">
+              <UserAvatar image={contactInfo?.photo} alt={contactInfo?.name} />
+            </div>
+            <p className="capitalize">{contactInfo?.name}</p>
           </div>
         ) : (
           <AccountCircle />

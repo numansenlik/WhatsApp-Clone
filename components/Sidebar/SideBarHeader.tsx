@@ -6,18 +6,28 @@ import {
   DataUsage,
   GroupsOutlined,
 } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { ClickAwayListener, IconButton } from "@mui/material";
 import UserAvatar from "../common/UserAvatar";
 import AppModal from "../AppModal";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useEffect, useState } from "react";
 import MapsUgcOutlinedIcon from "@mui/icons-material/MapsUgcOutlined";
+import SignOutButton from "../common/SignOutButton";
 
 const SideBarHeader: React.FC = () => {
   const isLoggedIn = auth?.currentUser;
   // Kullanıcının giriş yapmış olup olmadığını kontrol ediyoruz
   const router = useRouter();
+  // Menü durumunu kontrol etmek için state kullanıyoruz
+  const [open, setOpen] = useState(false);
+
+  const handleToggle = () => {
+    setOpen((prev) => !prev);
+  };
+  // Menüyü kapatma işlevi
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     if (isLoggedIn === null) {
@@ -37,27 +47,29 @@ const SideBarHeader: React.FC = () => {
           <AccountCircle className="rounded-full cursor-pointer hover:opacity-70" />
         )}
       </div>
-      <div className="w-[240px] flex justify-around">
-        <IconButton>
-          <GroupsOutlined />
-        </IconButton>
-        <IconButton>
-          <DataUsage />
-        </IconButton>
-        <IconButton>
-          <MapsUgcOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <AppModal
-            icon={<ChatOutlined />}
-            title="All Contacts"
-            modalType="chat"
-          />
-        </IconButton>
-        <IconButton>
-          <MoreVertIcon />
-        </IconButton>
-      </div>
+      <ClickAwayListener onClickAway={handleClose}>
+        <div className="w-[240px] flex justify-around">
+          <IconButton>
+            <GroupsOutlined />
+          </IconButton>
+          <IconButton>
+            <DataUsage />
+          </IconButton>
+          <IconButton>
+            <MapsUgcOutlinedIcon />
+          </IconButton>
+          <IconButton>
+            <AppModal
+              icon={<ChatOutlined />}
+              title="All Contacts"
+              modalType="chat"
+            />
+          </IconButton>
+          <IconButton>
+            <SignOutButton open={open} handleToggle={handleToggle} />
+          </IconButton>
+        </div>
+      </ClickAwayListener>
     </div>
   );
 };

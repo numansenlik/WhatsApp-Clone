@@ -33,7 +33,11 @@ const FirestoreChats: React.FC = () => {
             )
           )
           .map((chat: DocumentData, index: number) => (
-            <Link href={`/chat/${chat?.link}`} key={index}>
+            <Link
+              className="border-y-1 border-[#8696a0]"
+              href={`/chat/${chat?.link}`}
+              key={index}
+            >
               <Chat chatData={chat} />
             </Link>
           ))}

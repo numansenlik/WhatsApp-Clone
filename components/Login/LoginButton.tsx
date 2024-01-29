@@ -2,6 +2,7 @@
 
 import { auth, googleProvider } from "@/lib/firebase";
 import { addUserToFirestore } from "@/lib/firebase/userController";
+import { Console } from "console";
 import {
   browserSessionPersistence,
   setPersistence,
@@ -31,12 +32,12 @@ const LoginButton = () => {
           })
           .catch((error) => {
             // Hata durumunda hata mesajı fırlatılıyor
-            throw new Error(error.message);
+            console.log(error.message);
           });
       })
       .catch((error) => {
         // Hata durumunda hata mesajı fırlatılıyor
-        throw new Error(error.message);
+        console.log(error.message);
       });
   };
   return (

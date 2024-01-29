@@ -31,19 +31,21 @@ const Chat: React.FC<Props> = ({ data, chatData }) => {
   }, [filterContact]);
 
   return (
-    <div className="w-full flex items-center justify-between py-4 px-6 bg-white border-b border-gray-400 hover:bg-gray-200 opacity-80 overflow-hidden cursor-pointer">
-      <div className="flex justify-start items-center gap-4">
-        <Image
-          src={chatInfo?.photo ?? data?.image}
-          alt="user"
-          width={50}
-          height={50}
-          className="rounded-full"
-        />
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex flex-col items-start justify-start">
-            <p>{chatInfo?.name ?? data?.firstName}</p>
-            <p className="text-gray-500 truncate w-1/2">
+    <div className="w-full flex items-center justify-between  bg-white h-[72px]  border-y-[1px] border-gray-300 hover:bg-gray-200 opacity-80 overflow-hidden cursor-pointer">
+      <div className="flex justify-start items-center pr-[12px]">
+        <div className="px-[12px] h-[77px flex items-center]">
+          <Image
+            src={chatInfo?.photo ?? data?.image}
+            alt="user"
+            width={49}
+            height={49}
+            className="rounded-full "
+          />
+        </div>
+        <div className="flex items-center justify-around w-[357px] gap-4">
+          <div className="flex flex-col items-start justify-start w-full">
+            <p className="capitalize">{chatInfo?.name ?? data?.firstName}</p>
+            <p className="text-gray-500 truncate w-1/2 ">
               {" "}
               {chatData?.messages?.message.slice(-1)[0]?.messageBody ??
                 "This is the last message"}
