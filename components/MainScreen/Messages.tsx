@@ -1,22 +1,26 @@
 import { DocumentData } from "firebase/firestore";
 import React from "react";
 import { formatDate } from "../AppModal/helper";
+import { auth } from "@/lib/firebase";
 
 type Props = {
   data: DocumentData[];
-  paramId?: string;
 };
 
-const Messages: React.FC<Props> = ({ data, paramId }) => {
+const Messages: React.FC<Props> = ({ data }) => {
+  const currentUser = auth?.currentUser;
+
   return (
     <div>
       {data?.map((item, index) => (
         <div
           key={index}
           className={`flex items-center justify-end px-4 py-2 ${
-            item?.messageSenderId !== paramId ? "ml-auto" : null
+            item?.messageSenderId === currentUser?.uid ? "ml-auto" : null
           }  ${
-            item?.messageSenderId === paramId ? "bg-white" : "bg-green-100"
+            item?.messageSenderId !== currentUser?.uid
+              ? "bg-white"
+              : "bg-green-100"
           } rounded-lg shadow-md m-2 max-w-[50%] w-fit`}
         >
           <p>{item?.messageBody}</p>
